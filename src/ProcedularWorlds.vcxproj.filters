@@ -5,6 +5,7 @@
     <ClCompile Include="Renderer\SDLWrapper.cpp" />
     <ClCompile Include="Perlin\Perlin.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
+    <ClCompile Include="Generators\Heightmap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\SDLWrapper.h" />
@@ -13,5 +14,6 @@
     <ClInclude Include="Perlin\Perlin.h" />
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
+    <ClInclude Include="Generators\Heightmap.h" />
   </ItemGroup>
 </Project>

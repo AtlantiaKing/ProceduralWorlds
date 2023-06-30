@@ -171,12 +171,14 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Generators\Heightmap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
     <ClCompile Include="Perlin\Perlin.cpp" />
     <ClCompile Include="Renderer\SDLWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Generators\Heightmap.h" />
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
     <ClInclude Include="Perlin\Perlin.h" />
