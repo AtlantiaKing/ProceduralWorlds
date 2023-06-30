@@ -19,6 +19,11 @@ namespace that
 		 Returns the noise value at x,y
 		Noise value is always between 0 and 1
 		*/
+		float GetNoise(int x, int y) const;
+		/*
+		 Returns the noise value at x,y
+		Noise value is always between 0 and 1
+		*/
 		float GetNoise(float x, float y) const;
 	private:
 		std::vector<Vector2Int> m_OctaveSeeds{};

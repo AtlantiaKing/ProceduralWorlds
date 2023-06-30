@@ -31,6 +31,11 @@ void that::Perlin::SetOctaves(int nrOctaves)
 	}
 }
 
+float that::Perlin::GetNoise(int x, int y) const
+{
+	return GetNoise(static_cast<float>(x), static_cast<float>(y));
+}
+
 float that::Perlin::GetNoise(float x, float y) const
 {
 	float noise{};

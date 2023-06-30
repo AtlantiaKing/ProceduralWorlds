@@ -1,4 +1,5 @@
 #include "Renderer/SDLWrapper.h"
+#include "Generators/PerlinGenerator.h"
 
 #include <chrono>
 #include <thread>
@@ -9,6 +10,8 @@ int main()
 	constexpr int width{ 640 };
 	constexpr int height{ 480 };
 	that::SDLWrapper sdl{ width, height };
+
+	auto m_pGenerator{ std::make_unique<that::gen::PerlinGenerator>(sdl) };
 
 	// While the close button of the window isn't pressed
 	while (sdl.HandleEvent())
