@@ -1,4 +1,23 @@
+#include "Renderer/SDLWrapper.h"
+
+#include <chrono>
+#include <thread>
+
 int main()
 {
-	return 0;
+	// Create an SDL object
+	constexpr int width{ 640 };
+	constexpr int height{ 480 };
+	that::SDLWrapper sdl{ width, height };
+
+	// While the close button of the window isn't pressed
+	while (sdl.HandleEvent())
+	{
+		// Draw the window + texture
+		sdl.Draw();
+
+		// Don't overdo the CPU
+		constexpr std::chrono::milliseconds threadSleepTime{ 50 };
+		std::this_thread::sleep_for(threadSleepTime);
+	}
 }
