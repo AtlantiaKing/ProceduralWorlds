@@ -2,9 +2,15 @@
 
 namespace that
 {
-	struct Vector2 final
+	struct Vector2Int final
 	{
 		int x{};
 		int y{};
+	};
+
+	struct Vector2Float final
+	{
+		float x{};
+		float y{};
 	};
 }

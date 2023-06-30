@@ -65,7 +65,7 @@ bool that::SDLWrapper::HandleEvent() const
     return true;
 }
 
-void that::SDLWrapper::DrawPixel(const Vector2& coordinate, const Color& color)
+void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& color)
 {
     // Update the pixel inside the buffer
     const size_t coordinateId{ static_cast<size_t>(coordinate.y) * m_Width + static_cast<size_t>(coordinate.x) };

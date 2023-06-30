@@ -2,9 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Renderer\SDLRenderer.cpp" />
+    <ClCompile Include="Renderer\SDLWrapper.cpp" />
+    <ClCompile Include="Perlin\Perlin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Renderer\SDLRenderer.h" />
+    <ClInclude Include="Renderer\SDLWrapper.h" />
+    <ClInclude Include="Structs\Color.h" />
+    <ClInclude Include="Structs\Vector2.h" />
+    <ClInclude Include="Perlin\Perlin.h" />
   </ItemGroup>
 </Project>

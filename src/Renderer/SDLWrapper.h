@@ -25,7 +25,7 @@ namespace that
 		void Draw() const;
 		bool HandleEvent() const;
 
-		void DrawPixel(const Vector2& coordinate, const Color& color);
+		void DrawPixel(const Vector2Int& coordinate, const Color& color);
 
 	private:
 		void UpdateTexture() const;
