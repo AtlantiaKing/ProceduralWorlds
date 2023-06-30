@@ -25,7 +25,8 @@ that::SDLWrapper::SDLWrapper(int width, int height)
     SDL_SetTextureBlendMode(m_pTexture, SDL_BLENDMODE_BLEND);
 
     // Create a pixel buffer for this texture
-    m_PixelBuffer.resize(static_cast<size_t>(width * height), Color{});
+    const size_t textureSize = static_cast<size_t>(width) * static_cast<size_t>(height);
+    m_PixelBuffer.resize(textureSize, Color{});
 }
 
 that::SDLWrapper::~SDLWrapper()
@@ -67,7 +68,8 @@ bool that::SDLWrapper::HandleEvent() const
 void that::SDLWrapper::DrawPixel(const Vector2& coordinate, const Color& color)
 {
     // Update the pixel inside the buffer
-    m_PixelBuffer[static_cast<size_t>(coordinate.y * m_Width + coordinate.x)] = color;
+    const size_t coordinateId{ static_cast<size_t>(coordinate.y) * m_Width + static_cast<size_t>(coordinate.x) };
+    m_PixelBuffer[coordinateId] = color;
 }
 
 void that::SDLWrapper::UpdateTexture() const
