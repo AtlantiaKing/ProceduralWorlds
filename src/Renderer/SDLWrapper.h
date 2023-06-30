@@ -24,6 +24,7 @@ namespace that
 
 		void Draw() const;
 		bool HandleEvent() const;
+		Vector2Int GetWindowSize() const;
 
 		void DrawPixel(const Vector2Int& coordinate, const Color& color);
 

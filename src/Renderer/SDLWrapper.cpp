@@ -65,6 +65,11 @@ bool that::SDLWrapper::HandleEvent() const
     return true;
 }
 
+that::Vector2Int that::SDLWrapper::GetWindowSize() const
+{
+    return Vector2Int{ m_Width, m_Height };
+}
+
 void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& color)
 {
     // Update the pixel inside the buffer
