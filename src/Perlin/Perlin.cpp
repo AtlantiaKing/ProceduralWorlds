@@ -22,10 +22,10 @@ void that::Perlin::SetOctaves(int nrOctaves)
 		m_MaxNoiseValue += 1.0f / i;
 
 		// Creates a new displacement for each octave
-		const Vector2Int seed
+		const Vector2Float seed
 		{
-			static_cast<int>((rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement),
-			static_cast<int>((rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement)
+			(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement,
+			(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement
 		};
 		m_OctaveSeeds.emplace_back(seed);
 	}

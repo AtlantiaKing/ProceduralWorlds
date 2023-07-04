@@ -26,7 +26,7 @@ namespace that
 		*/
 		float GetNoise(float x, float y) const;
 	private:
-		std::vector<Vector2Int> m_OctaveSeeds{};
+		std::vector<Vector2Float> m_OctaveSeeds{};
 
 		float GetOctaveNoise(float x, float y, int octave) const;
 		Vector2Float GetRandomGradient(int ix, int iy) const;
