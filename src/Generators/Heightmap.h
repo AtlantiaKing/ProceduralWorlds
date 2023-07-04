@@ -7,6 +7,7 @@
 namespace that
 {
 	class SDLWrapper;
+	class Perlin;
 }
 
 namespace that::gen
@@ -18,7 +19,7 @@ namespace that::gen
 		~Heightmap() = default;
 
 	private:
-		Color GetHeightColor(float perlinValue) const;
+		Color GetHeightColor(const Perlin& perlin, int x, int y) const;
 
 		const int m_Octaves{ 5 };
 		const float m_Zoom{ 50.0f };

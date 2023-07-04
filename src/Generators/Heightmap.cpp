@@ -12,21 +12,22 @@ that::gen::Heightmap::Heightmap(that::SDLWrapper& sdl)
 	const auto& windowSize{ sdl.GetWindowSize() };
 
 	that::Perlin perlin{ m_Octaves, m_Zoom };
+
 	for (int x{}; x < windowSize.x; ++x)
 	{
 		for (int y{}; y < windowSize.y; ++y)
 		{
-			const float perlinValue{ perlin.GetNoise(x, y) };
-
-			const Color heightMapColor{ GetHeightColor(perlinValue) };
+			const Color heightMapColor{ GetHeightColor(perlin, x,y) };
 
 			sdl.DrawPixel({ x,y }, heightMapColor);
 		}
 	}
 }
 
-that::Color that::gen::Heightmap::GetHeightColor(float perlinValue) const
+that::Color that::gen::Heightmap::GetHeightColor(const Perlin& perlin, int x, int y) const
 {
+	const float perlinValue{ perlin.GetNoise(x, y) };
+
 	if (perlinValue < m_SeaLevel)
 	{
 		return m_WaterColor;
