@@ -74,7 +74,16 @@ void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& colo
 {
     // Update the pixel inside the buffer
     const size_t coordinateId{ static_cast<size_t>(coordinate.y) * m_Width + static_cast<size_t>(coordinate.x) };
-    m_PixelBuffer[coordinateId] = color;
+    
+    Color& colorOnCoord{ m_PixelBuffer[coordinateId] };
+
+    const float alphaPercentage{ static_cast<float>(color.a) / UINT8_MAX };
+    const float inverseAlphaPercentage{ 1.0f - alphaPercentage };
+
+    colorOnCoord.r = static_cast<uint8_t>(color.r * alphaPercentage + colorOnCoord.r * inverseAlphaPercentage);
+    colorOnCoord.g = static_cast<uint8_t>(color.g * alphaPercentage + colorOnCoord.g * inverseAlphaPercentage);
+    colorOnCoord.b = static_cast<uint8_t>(color.b * alphaPercentage + colorOnCoord.b * inverseAlphaPercentage);
+    colorOnCoord.a = std::max(color.a, colorOnCoord.a);
 }
 
 void that::SDLWrapper::UpdateTexture() const
