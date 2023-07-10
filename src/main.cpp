@@ -6,9 +6,14 @@
 
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 int main()
 {
+	const unsigned int seed{ static_cast<unsigned int>(time(nullptr)) };
+	srand(seed);
+	std::cout << "Current seed: " << seed << "\n";
+
 	// Create an SDL object
 	constexpr int width{ 640 };
 	constexpr int height{ 480 };
