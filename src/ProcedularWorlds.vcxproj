@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\imgui-1.89.4;$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -101,7 +101,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\imgui-1.89.4;$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -126,7 +126,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\imgui-1.89.4;$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -151,7 +151,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\3rdparty\imgui-1.89.4;$(SolutionDir)..\3rdparty\SDL2Image\include;$(SolutionDir)..\3rdparty\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -171,16 +171,35 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_demo.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_draw.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_plot.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_tables.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_widgets.cpp" />
     <ClCompile Include="Generators\Heightmap.cpp" />
+    <ClCompile Include="ImGui\ImGuiWrapper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
     <ClCompile Include="Perlin\Perlin.cpp" />
     <ClCompile Include="Renderer\SDLWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imconfig.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_internal.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_plot.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_rectpack.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_textedit.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_truetype.h" />
     <ClInclude Include="Generators\Heightmap.h" />
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
+    <ClInclude Include="ImGui\ImGuiWrapper.h" />
     <ClInclude Include="Perlin\Perlin.h" />
     <ClInclude Include="Renderer\SDLWrapper.h" />
     <ClInclude Include="Structs\Color.h" />

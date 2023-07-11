@@ -6,6 +6,15 @@
     <ClCompile Include="Perlin\Perlin.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
     <ClCompile Include="Generators\Heightmap.cpp" />
+    <ClCompile Include="ImGui\ImGuiWrapper.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_demo.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_draw.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_plot.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_tables.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_widgets.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\SDLWrapper.h" />
@@ -15,5 +24,15 @@
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
     <ClInclude Include="Generators\Heightmap.h" />
+    <ClInclude Include="ImGui\ImGuiWrapper.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imconfig.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_internal.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_plot.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_rectpack.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_textedit.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_truetype.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.h" />
   </ItemGroup>
 </Project>

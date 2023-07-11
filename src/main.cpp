@@ -1,9 +1,14 @@
+// Third party wrappers
 #include "Renderer/SDLWrapper.h"
+#include "ImGui/ImGuiWrapper.h"
+
+#include <imgui.h>
 
 // GENERATORS
 #include "Generators/PerlinGenerator.h"
 #include "Generators/Heightmap.h"
 
+// STD includes
 #include <chrono>
 #include <thread>
 #include <iostream>
@@ -18,14 +23,26 @@ int main()
 	constexpr int width{ 640 };
 	constexpr int height{ 480 };
 	that::SDLWrapper sdl{ width, height };
+	that::ImGuiWrapper imgui{ sdl.GetWindow(), sdl.GetRenderer() };
 
-	auto m_pGenerator{ std::make_unique<that::gen::Heightmap>(sdl) };
+	auto pGenerator{ std::make_unique<that::gen::Heightmap>(sdl) };
 
 	// While the close button of the window isn't pressed
-	while (sdl.HandleEvent())
+	while (sdl.HandleEvent(imgui))
 	{
-		// Draw the window + texture
-		sdl.Draw();
+		imgui.BeginDraw();
+
+		// ImGui draw calls
+		// Draw ImGUI here
+		imgui.Draw();
+
+		// SDL draw calls
+		sdl.DrawClearColor();
+		sdl.DrawTexture();
+
+		// Draw the window
+		imgui.EndDraw();
+		sdl.SwapBuffer();
 
 		// Don't overdo the CPU
 		constexpr std::chrono::milliseconds threadSleepTime{ 50 };

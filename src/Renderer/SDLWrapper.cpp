@@ -3,6 +3,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
+#include "../ImGui/ImGuiWrapper.h"
+
 that::SDLWrapper::SDLWrapper(int width, int height)
     : m_Width{ width }, m_Height{ height }
 {
@@ -37,27 +39,35 @@ that::SDLWrapper::~SDLWrapper()
     SDL_Quit();
 }
 
-void that::SDLWrapper::Draw() const
+void that::SDLWrapper::DrawClearColor() const
+{
+    // Render clear color
+    SDL_SetRenderDrawColor(m_pRenderer, m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, 0);
+    SDL_RenderClear(m_pRenderer);
+}
+
+void that::SDLWrapper::DrawTexture() const
 {    
     // Update the latest changes to the texture
     UpdateTexture();
 
-    // Render clear color
-    SDL_SetRenderDrawColor(m_pRenderer, m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, 0);
-    SDL_RenderClear(m_pRenderer);
-
     // Render the texture
     SDL_RenderCopy(m_pRenderer, m_pTexture, nullptr, nullptr);
+}
 
+void that::SDLWrapper::SwapBuffer() const
+{
     // Render the current buffer
     SDL_RenderPresent(m_pRenderer);
 }
 
-bool that::SDLWrapper::HandleEvent() const
+bool that::SDLWrapper::HandleEvent(const ImGuiWrapper& imgui) const
 {
     SDL_Event event; 
     while (SDL_PollEvent(&event))
     {
+        imgui.HandleInput(&event);
+
         // This function should notify the main to stop if SDL_QUIT has been received
         if (event.type == SDL_QUIT) return false;
     }
@@ -68,6 +78,16 @@ bool that::SDLWrapper::HandleEvent() const
 that::Vector2Int that::SDLWrapper::GetWindowSize() const
 {
     return Vector2Int{ m_Width, m_Height };
+}
+
+SDL_Window* that::SDLWrapper::GetWindow() const
+{
+    return m_pWindow;
+}
+
+SDL_Renderer* that::SDLWrapper::GetRenderer() const
+{
+    return m_pRenderer;
 }
 
 void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& color)

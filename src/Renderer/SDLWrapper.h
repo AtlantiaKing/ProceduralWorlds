@@ -11,6 +11,8 @@ struct SDL_Texture;
 
 namespace that
 {
+	class ImGuiWrapper;
+
 	class SDLWrapper final
 	{
 	public:
@@ -22,9 +24,13 @@ namespace that
 		SDLWrapper& operator=(const SDLWrapper& other) = delete;
 		SDLWrapper& operator=(SDLWrapper&& other) = delete;
 
-		void Draw() const;
-		bool HandleEvent() const;
+		void DrawClearColor() const;
+		void DrawTexture() const;
+		void SwapBuffer() const;
+		bool HandleEvent(const ImGuiWrapper& imgui) const;
 		Vector2Int GetWindowSize() const;
+		SDL_Window* GetWindow() const;
+		SDL_Renderer* GetRenderer() const;
 
 		void DrawPixel(const Vector2Int& coordinate, const Color& color);
 
