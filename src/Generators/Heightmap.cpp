@@ -3,14 +3,34 @@
 #include "../Renderer/SDLWrapper.h"
 #include "../Perlin/Perlin.h"
 
-#include <time.h>
+#include <imgui.h>
 
-that::gen::Heightmap::Heightmap(that::SDLWrapper& sdl)
+that::gen::Heightmap::Heightmap(unsigned int seed, SDLWrapper& sdl)
+	: m_Seed{ static_cast<int>(seed) }
 {
-	srand(static_cast<unsigned int>(time(nullptr)));
+	Draw(sdl);
+}
+
+void that::gen::Heightmap::DrawImGui(SDLWrapper& sdl)
+{
+	ImGui::Begin("Heightmap Settings");
+	ImGui::Text("Perlin Settings");
+	if (ImGui::InputInt("Current seed", &m_Seed)) Draw(sdl);
+	if (ImGui::InputInt("Nr Octaves", &m_Octaves)) Draw(sdl);
+	if (ImGui::InputFloat("Zoom level", &m_Zoom)) Draw(sdl);
+	ImGui::Text("Map Settings");
+	if (ImGui::InputFloat("Sealevel", &m_SeaLevel)) Draw(sdl);
+	if (ImGui::InputFloat("Lowlands level", &m_LowLevel)) Draw(sdl);
+	if (ImGui::InputFloat("Middlelands level", &m_MiddleLevel)) Draw(sdl);
+	if (ImGui::InputFloat("Highlands level", &m_HighLevel)) Draw(sdl);
+	ImGui::End();
+}
+
+void that::gen::Heightmap::Draw(SDLWrapper& sdl) const
+{
+	srand(m_Seed);
 
 	const auto& windowSize{ sdl.GetWindowSize() };
-
 	that::Perlin perlin{ m_Octaves, m_Zoom };
 
 	for (int x{}; x < windowSize.x; ++x)

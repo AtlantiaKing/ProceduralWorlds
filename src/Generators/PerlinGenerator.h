@@ -12,11 +12,16 @@ namespace that::gen
 	class PerlinGenerator final : public Generator
 	{
 	public:
-		PerlinGenerator(SDLWrapper& sdl);
+		PerlinGenerator(unsigned int seed, SDLWrapper& sdl);
 		~PerlinGenerator() = default;
 
+		virtual void DrawImGui(SDLWrapper& sdl) override;
+
 	private:
-		const int m_Octaves{ 1 };
-		const float m_Zoom{ 50.0f };
+		void Draw(SDLWrapper& sdl) const;
+
+		int m_Seed{};
+		int m_Octaves{ 1 };
+		float m_Zoom{ 50.0f };
 	};
 }

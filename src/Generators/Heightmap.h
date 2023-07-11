@@ -15,21 +15,26 @@ namespace that::gen
 	class Heightmap final : public Generator
 	{
 	public:
-		Heightmap(SDLWrapper& sdl);
+		Heightmap(unsigned int seed, SDLWrapper& sdl);
 		~Heightmap() = default;
 
+		virtual void DrawImGui(SDLWrapper& sdl) override;
+
 	private:
+		void Draw(SDLWrapper& sdl) const;
 		Color GetHeightColor(const Perlin& perlin, int x, int y) const;
 
-		const int m_Octaves{ 5 };
-		const float m_Zoom{ 50.0f };
+		int m_Seed{};
 
-		const float m_SeaLevel{ 0.5f };
+		int m_Octaves{ 5 };
+		float m_Zoom{ 50.0f };
+
+		float m_SeaLevel{ 0.5f };
 
 		// All these percentages are expressed in "amount above sea level"
-		const float m_LowLevel{ 0.1f }; // From what percentage does the color lerp to yellow
-		const float m_MiddleLevel{ 0.4f }; // This percentage is pure middle land color
-		const float m_HighLevel{ 0.45f }; // This percentage is pure high land color (is ceil level)
+		float m_LowLevel{ 0.1f }; // From what percentage does the color lerp to yellow
+		float m_MiddleLevel{ 0.4f }; // This percentage is pure middle land color
+		float m_HighLevel{ 0.45f }; // This percentage is pure high land color (is ceil level)
 
 		const Color m_WaterColor{ 204, 243, 255 };
 		const Color m_LowLandColor{ 138, 186, 125 };
