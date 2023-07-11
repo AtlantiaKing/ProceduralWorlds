@@ -5,15 +5,20 @@
 
 #include <imgui.h>
 
-that::gen::PerlinGenerator::PerlinGenerator(unsigned int seed, SDLWrapper& sdl)
+that::gen::PerlinGenerator::PerlinGenerator(unsigned int seed)
 	: m_Seed{ static_cast<int>(seed) }
+{
+}
+
+void that::gen::PerlinGenerator::Activate(SDLWrapper& sdl)
 {
 	Draw(sdl);
 }
 
 void that::gen::PerlinGenerator::DrawImGui(SDLWrapper& sdl)
 {
-	ImGui::Begin("Perlin Settings");
+	bool openState{ false };
+	ImGui::Begin("Perlin Settings", &openState);
 	if (ImGui::InputInt("Current seed", &m_Seed)) Draw(sdl);
 	if (ImGui::InputInt("Nr Octaves", &m_Octaves)) Draw(sdl);
 	if (ImGui::InputFloat("Zoom level", &m_Zoom)) Draw(sdl);

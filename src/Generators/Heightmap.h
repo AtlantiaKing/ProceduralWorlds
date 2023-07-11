@@ -15,9 +15,10 @@ namespace that::gen
 	class Heightmap final : public Generator
 	{
 	public:
-		Heightmap(unsigned int seed, SDLWrapper& sdl);
+		Heightmap(unsigned int seed);
 		~Heightmap() = default;
 
+		virtual void Activate(SDLWrapper& sdl) override;
 		virtual void DrawImGui(SDLWrapper& sdl) override;
 
 	private:

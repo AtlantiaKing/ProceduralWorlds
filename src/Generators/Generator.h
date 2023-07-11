@@ -12,6 +12,7 @@ namespace that::gen
 	public:
 		virtual ~Generator() = default;
 
+		virtual void Activate(SDLWrapper& sdl) = 0;
 		virtual void DrawImGui(SDLWrapper& sdl) = 0;
 	};
 }

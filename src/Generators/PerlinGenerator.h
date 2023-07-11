@@ -12,9 +12,10 @@ namespace that::gen
 	class PerlinGenerator final : public Generator
 	{
 	public:
-		PerlinGenerator(unsigned int seed, SDLWrapper& sdl);
+		PerlinGenerator(unsigned int seed);
 		~PerlinGenerator() = default;
 
+		virtual void Activate(SDLWrapper& sdl) override;
 		virtual void DrawImGui(SDLWrapper& sdl) override;
 
 	private:

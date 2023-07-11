@@ -12,6 +12,8 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <map>
+#include <string>
 
 int main()
 {
@@ -25,7 +27,14 @@ int main()
 	that::SDLWrapper sdl{ width, height };
 	that::ImGuiWrapper imgui{ sdl.GetWindow(), sdl.GetRenderer() };
 
-	auto pGenerator{ std::make_unique<that::gen::Heightmap>(seed, sdl) };
+	// Create the generators
+	std::map<std::string, std::unique_ptr<that::gen::Generator>> generators{};
+	generators.insert(std::pair("Perlin", std::make_unique<that::gen::PerlinGenerator>(seed)));
+	generators.insert(std::pair("Heightmap", std::make_unique<that::gen::Heightmap>(seed)));
+
+	// Select the default generator
+	that::gen::Generator* pGenerator{ generators["Perlin"].get() };
+	pGenerator->Activate(sdl);
 
 	// While the close button of the window isn't pressed
 	while (sdl.HandleEvent(imgui))
@@ -33,6 +42,18 @@ int main()
 		imgui.BeginDraw();
 
 		// ImGui draw calls
+		ImGui::Begin("Generators");
+		for (const auto& generator : generators)
+		{
+			if (ImGui::Button(generator.first.c_str()))
+			{
+				pGenerator = generator.second.get();
+				pGenerator->Activate(sdl);
+			}
+		}
+		ImGui::End();
+		constexpr ImVec2 settingsWindowPos{ 125, 17 };
+		ImGui::SetNextWindowPos(settingsWindowPos);
 		pGenerator->DrawImGui(sdl);
 		imgui.Draw();
 

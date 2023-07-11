@@ -5,15 +5,20 @@
 
 #include <imgui.h>
 
-that::gen::Heightmap::Heightmap(unsigned int seed, SDLWrapper& sdl)
+that::gen::Heightmap::Heightmap(unsigned int seed)
 	: m_Seed{ static_cast<int>(seed) }
+{
+}
+
+void that::gen::Heightmap::Activate(SDLWrapper& sdl)
 {
 	Draw(sdl);
 }
 
 void that::gen::Heightmap::DrawImGui(SDLWrapper& sdl)
 {
-	ImGui::Begin("Heightmap Settings");
+	bool openState{ false };
+	ImGui::Begin("Heightmap Settings", &openState);
 	ImGui::Text("Perlin Settings");
 	if (ImGui::InputInt("Current seed", &m_Seed)) Draw(sdl);
 	if (ImGui::InputInt("Nr Octaves", &m_Octaves)) Draw(sdl);
