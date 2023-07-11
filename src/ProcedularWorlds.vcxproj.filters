@@ -6,15 +6,31 @@
     <ClCompile Include="Perlin\Perlin.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
     <ClCompile Include="Generators\Heightmap.cpp" />
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_plot.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="ImGui\ImGuiWrapper.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_demo.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_draw.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_plot.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_tables.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\imgui_widgets.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\SDLWrapper.h" />
@@ -24,15 +40,38 @@
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
     <ClInclude Include="Generators\Heightmap.h" />
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_plot.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="ImGui\ImGuiWrapper.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imconfig.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_internal.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imgui_plot.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_rectpack.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_textedit.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\imstb_truetype.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdl2.h" />
-    <ClInclude Include="..\3rdparty\imgui-1.89.4\backends\imgui_impl_sdlrenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{49ee13bf-f432-4981-aa8e-0df7b83357e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
