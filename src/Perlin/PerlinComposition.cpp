@@ -1,68 +1,56 @@
-#include "Perlin.h"
+#include "PerlinComposition.h"
 
 #include <SDL_stdinc.h>
 #include <algorithm>
 
-that::Perlin::Perlin(int nrOctaves, float zoom)
-	: m_Zoom{ zoom }
+void that::PerlinComposition::AddOctave(float multiplier, float zoom)
 {
-	SetOctaves(nrOctaves);
-}
+	// Calculates the maximum value of noise a coordinate can have
+	m_MaxNoiseValue += multiplier;
 
-void that::Perlin::SetOctaves(int nrOctaves)
-{
-	m_OctaveSeeds.clear();
+	// Create a new octave
+	PerlinOctave octave{ multiplier, zoom };
 
-	m_NrOctaves = nrOctaves;
-	m_MaxNoiseValue = 0.0f;
-
-	for (int i{ 1 }; i <= nrOctaves; ++i)
+	// Creates a new displacement for each octave
+	const Vector2Float offset
 	{
-		// Calculates the maximum value of noise a coordinate can have
-		m_MaxNoiseValue += 1.0f / i;
+		(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement,
+		(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement
+	};
+	octave.offset = offset;
 
-		// Creates a new displacement for each octave
-		const Vector2Float seed
-		{
-			(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement,
-			(rand() / static_cast<float>(RAND_MAX)) * m_MaxOctaveDisplacement
-		};
-		m_OctaveSeeds.emplace_back(seed);
-	}
+	m_Octaves.emplace_back(octave);
 }
 
-float that::Perlin::GetNoise(int x, int y) const
+float that::PerlinComposition::GetNoise(int x, int y) const
 {
 	return GetNoise(static_cast<float>(x), static_cast<float>(y));
 }
 
-float that::Perlin::GetNoise(float x, float y) const
+float that::PerlinComposition::GetNoise(float x, float y) const
 {
+	// Calculate the noise at this point
 	float noise{};
-	for (int i{ 1 }; i <= m_NrOctaves; ++i)
+	for (const auto& octave : m_Octaves)
 	{
-		noise += GetOctaveNoise(x, y, i) / i;
+		noise += GetOctaveNoise(x, y, octave);
 	}
-	noise /= (m_MaxNoiseValue / 2.0f);
-	noise /= 2.0f;
-	noise += 0.5f;
 
-	return std::clamp(noise, 0.0f, 1.0f);
+	// map -maxNoise -> maxNoise to 0 -> 1
+	noise = (noise + m_MaxNoiseValue) / (2.0f * m_MaxNoiseValue);
+
+	return noise;
 }
 
-float that::Perlin::GetOctaveNoise(float x, float y, int octave) const
-{
-	// You can't have an octave that has an index lower than 0
-	if (octave <= 0) return 0.0f;
-
+float that::PerlinComposition::GetOctaveNoise(float x, float y, const PerlinOctave& octave) const
+{	
 	// Displace the current coordinate depending on the octave
-	const size_t octaveIdx{ static_cast<size_t>(octave - 1) };
-	x += m_MiddleOfNoise + m_OctaveSeeds[octaveIdx].x;
-	y += m_MiddleOfNoise + m_OctaveSeeds[octaveIdx].y;
+	x += m_MiddleOfNoise + octave.offset.x;
+	y += m_MiddleOfNoise + octave.offset.y;
 
 	// Multiply the current coordinate depending on the octave and zoom
-	x *= powf(2.0f, static_cast<float>(octave - 1)) / m_Zoom;
-	y *= powf(2.0f, static_cast<float>(octave - 1)) / m_Zoom;
+	x *= powf(2.0f, 1.0f / octave.multiplier - 1) / octave.zoom;
+	y *= powf(2.0f, 1.0f / octave.multiplier - 1) / octave.zoom;
 
 	// Calculate the grid corners
 	const int gridX0{ static_cast<int>(x) };
@@ -86,10 +74,10 @@ float that::Perlin::GetOctaveNoise(float x, float y, int octave) const
 	const float yEase{ 3.0f * powf(gridPosY, 2.0f) - 2.0f * powf(gridPosY, 3.0f) };
 	const float result{ Lerp(Lerp(dotGradient0, dotGradient1, xEase), Lerp(dotGradient2, dotGradient3, xEase), yEase) };
 
-	return result;
+	return result * octave.multiplier;
 }
 
-that::Vector2Float that::Perlin::GetRandomGradient(int ix, int iy) const
+that::Vector2Float that::PerlinComposition::GetRandomGradient(int ix, int iy) const
 {
 	// No precomputed gradients mean this works for any number of grid coordinates
 	const unsigned w = 8 * sizeof(unsigned);
@@ -109,12 +97,12 @@ that::Vector2Float that::Perlin::GetRandomGradient(int ix, int iy) const
 	return v;
 }
 
-float that::Perlin::Lerp(float a, float b, float t) const
+float that::PerlinComposition::Lerp(float a, float b, float t) const
 {
 	return a + t * (b - a);
 }
 
-float that::Perlin::Dot(const Vector2Float& a, const Vector2Float& b) const
+float that::PerlinComposition::Dot(const Vector2Float& a, const Vector2Float& b) const
 {
 	return a.x * b.x + a.y * b.y;
 }

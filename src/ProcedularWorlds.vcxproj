@@ -183,7 +183,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClCompile Include="ImGui\ImGuiWrapper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Generators\PerlinGenerator.cpp" />
-    <ClCompile Include="Perlin\Perlin.cpp" />
+    <ClCompile Include="Perlin\PerlinComposition.cpp" />
     <ClCompile Include="Renderer\SDLWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +200,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Generators\Generator.h" />
     <ClInclude Include="Generators\PerlinGenerator.h" />
     <ClInclude Include="ImGui\ImGuiWrapper.h" />
-    <ClInclude Include="Perlin\Perlin.h" />
+    <ClInclude Include="Perlin\PerlinComposition.h" />
     <ClInclude Include="Renderer\SDLWrapper.h" />
     <ClInclude Include="Structs\Color.h" />
     <ClInclude Include="Structs\Vector2.h" />

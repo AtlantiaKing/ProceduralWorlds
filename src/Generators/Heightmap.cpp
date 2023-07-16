@@ -1,7 +1,7 @@
 #include "Heightmap.h"
 
 #include "../Renderer/SDLWrapper.h"
-#include "../Perlin/Perlin.h"
+#include "../Perlin/PerlinComposition.h"
 
 #include <imgui.h>
 
@@ -36,7 +36,11 @@ void that::gen::Heightmap::Draw(SDLWrapper& sdl) const
 	srand(m_Seed);
 
 	const auto& windowSize{ sdl.GetWindowSize() };
-	that::Perlin perlin{ m_Octaves, m_Zoom };
+	that::PerlinComposition perlin{};
+	for (int i{ 1 }; i <= m_Octaves; ++i)
+	{
+		perlin.AddOctave(1.0f / i, m_Zoom);
+	}
 
 	for (int x{}; x < windowSize.x; ++x)
 	{
@@ -49,9 +53,9 @@ void that::gen::Heightmap::Draw(SDLWrapper& sdl) const
 	}
 }
 
-that::Color that::gen::Heightmap::GetHeightColor(const Perlin& perlin, int x, int y) const
+that::Color that::gen::Heightmap::GetHeightColor(const PerlinComposition& OctavedPerlin, int x, int y) const
 {
-	const float perlinValue{ perlin.GetNoise(x, y) };
+	const float perlinValue{ OctavedPerlin.GetNoise(x, y) };
 
 	if (perlinValue < m_SeaLevel)
 	{

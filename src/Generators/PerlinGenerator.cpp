@@ -1,7 +1,7 @@
 #include "PerlinGenerator.h"
 
 #include "../Renderer/SDLWrapper.h"
-#include "../Perlin/Perlin.h"
+#include "../Perlin/PerlinComposition.h"
 
 #include <imgui.h>
 
@@ -30,7 +30,11 @@ void that::gen::PerlinGenerator::Draw(SDLWrapper& sdl) const
 	srand(m_Seed);
 
 	const auto& windowSize{ sdl.GetWindowSize() };
-	that::Perlin perlin{ m_Octaves, m_Zoom };
+	that::PerlinComposition perlin{};
+	for (int i{ 1 }; i <= m_Octaves; ++i)
+	{
+		perlin.AddOctave(1.0f / i, m_Zoom);
+	}
 
 	for (int x{}; x < windowSize.x; ++x)
 	{

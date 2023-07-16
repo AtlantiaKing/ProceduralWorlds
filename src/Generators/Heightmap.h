@@ -7,7 +7,7 @@
 namespace that
 {
 	class SDLWrapper;
-	class Perlin;
+	class PerlinComposition;
 }
 
 namespace that::gen
@@ -23,7 +23,7 @@ namespace that::gen
 
 	private:
 		void Draw(SDLWrapper& sdl) const;
-		Color GetHeightColor(const Perlin& perlin, int x, int y) const;
+		Color GetHeightColor(const PerlinComposition& OctavedPerlin, int x, int y) const;
 
 		int m_Seed{};
 
