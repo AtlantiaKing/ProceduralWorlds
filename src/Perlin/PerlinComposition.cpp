@@ -1,8 +1,5 @@
 #include "PerlinComposition.h"
 
-#include <SDL_stdinc.h>
-#include <algorithm>
-
 void that::PerlinComposition::AddOctave(float multiplier, float zoom)
 {
 	// Calculates the maximum value of noise a coordinate can have
@@ -88,7 +85,8 @@ that::Vector2Float that::PerlinComposition::GetRandomGradient(int ix, int iy) co
 	b *= 1911520717;
 	a ^= (b << s) | (b >> (w - s));
 	a *= 2048419325;
-	const float random = static_cast<float>(a * (M_PI / ~(~0u >> 1))); // in [0, 2*Pi]
+	constexpr double pi{ 3.141592653589793 };
+	const float random = static_cast<float>(a * (pi / ~(~0u >> 1))); // in [0, 2*Pi]
 	const Vector2Float v
 	{
 		cosf(random),
@@ -105,4 +103,27 @@ float that::PerlinComposition::Lerp(float a, float b, float t) const
 float that::PerlinComposition::Dot(const Vector2Float& a, const Vector2Float& b) const
 {
 	return a.x * b.x + a.y * b.y;
+}
+
+extern "C"
+{
+	THATWORLDS_API that::PerlinComposition* that::PerlinComposition_Create()
+	{
+		return new PerlinComposition{};
+	}
+
+	THATWORLDS_API void that::PerlinComposition_Destroy(PerlinComposition* pPerlin)
+	{
+		delete pPerlin;
+	}
+
+	THATWORLDS_API void that::PerlinComposition_AddOctave(PerlinComposition* pPerlin, float multiplier, float zoom)
+	{
+		pPerlin->AddOctave(multiplier, zoom);
+	}
+
+	THATWORLDS_API float that::PerlinComposition_GetNoise(PerlinComposition* pPerlin, float x, float y)
+	{
+		return pPerlin->GetNoise(x, y);
+	}
 }

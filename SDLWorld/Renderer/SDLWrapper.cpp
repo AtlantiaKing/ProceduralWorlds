@@ -3,9 +3,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-#include "../ImGui/ImGuiWrapper.h"
+//#include "ImGui/ImGuiWrapper.h"
 
-that::SDLWrapper::SDLWrapper(int width, int height)
+sdlw::SDLWrapper::SDLWrapper(int width, int height)
     : m_Width{ width }, m_Height{ height }
 {
     // Initialize the SDL library
@@ -31,7 +31,7 @@ that::SDLWrapper::SDLWrapper(int width, int height)
     m_PixelBuffer.resize(textureSize, Color{});
 }
 
-that::SDLWrapper::~SDLWrapper()
+sdlw::SDLWrapper::~SDLWrapper()
 {
     SDL_DestroyTexture(m_pTexture);
     SDL_DestroyRenderer(m_pRenderer);
@@ -39,14 +39,14 @@ that::SDLWrapper::~SDLWrapper()
     SDL_Quit();
 }
 
-void that::SDLWrapper::DrawClearColor() const
+void sdlw::SDLWrapper::DrawClearColor() const
 {
     // Render clear color
     SDL_SetRenderDrawColor(m_pRenderer, m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, 0);
     SDL_RenderClear(m_pRenderer);
 }
 
-void that::SDLWrapper::DrawTexture() const
+void sdlw::SDLWrapper::DrawTexture() const
 {    
     // Update the latest changes to the texture
     UpdateTexture();
@@ -55,19 +55,17 @@ void that::SDLWrapper::DrawTexture() const
     SDL_RenderCopy(m_pRenderer, m_pTexture, nullptr, nullptr);
 }
 
-void that::SDLWrapper::SwapBuffer() const
+void sdlw::SDLWrapper::SwapBuffer() const
 {
     // Render the current buffer
     SDL_RenderPresent(m_pRenderer);
 }
 
-bool that::SDLWrapper::HandleEvent(const ImGuiWrapper& imgui) const
+bool sdlw::SDLWrapper::HandleEvent() const
 {
     SDL_Event event; 
     while (SDL_PollEvent(&event))
     {
-        imgui.HandleInput(&event);
-
         // This function should notify the main to stop if SDL_QUIT has been received
         if (event.type == SDL_QUIT) return false;
     }
@@ -75,22 +73,22 @@ bool that::SDLWrapper::HandleEvent(const ImGuiWrapper& imgui) const
     return true;
 }
 
-that::Vector2Int that::SDLWrapper::GetWindowSize() const
+that::Vector2Int sdlw::SDLWrapper::GetWindowSize() const
 {
-    return Vector2Int{ m_Width, m_Height };
+    return that::Vector2Int{ m_Width, m_Height };
 }
 
-SDL_Window* that::SDLWrapper::GetWindow() const
+SDL_Window* sdlw::SDLWrapper::GetWindow() const
 {
     return m_pWindow;
 }
 
-SDL_Renderer* that::SDLWrapper::GetRenderer() const
+SDL_Renderer* sdlw::SDLWrapper::GetRenderer() const
 {
     return m_pRenderer;
 }
 
-void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& color)
+void sdlw::SDLWrapper::DrawPixel(const that::Vector2Int& coordinate, const Color& color)
 {
     // Update the pixel inside the buffer
     const size_t coordinateId{ static_cast<size_t>(coordinate.y) * m_Width + static_cast<size_t>(coordinate.x) };
@@ -106,7 +104,7 @@ void that::SDLWrapper::DrawPixel(const Vector2Int& coordinate, const Color& colo
     colorOnCoord.a = std::max(color.a, colorOnCoord.a);
 }
 
-void that::SDLWrapper::UpdateTexture() const
+void sdlw::SDLWrapper::UpdateTexture() const
 {
     // Copy the pixel buffer to the texture
     SDL_UpdateTexture(m_pTexture, nullptr, m_PixelBuffer.data(), m_Width * sizeof(Color));

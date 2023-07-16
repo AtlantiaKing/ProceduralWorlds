@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace that
+namespace sdlw
 {
 	struct Color final
 	{

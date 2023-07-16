@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Structs/Vector2.h"
-#include "../Structs/Color.h"
+#include "Structs/Vector2.h"
+
+#include "../Utils/Color.h"
 
 #include <vector>
 
@@ -9,10 +10,8 @@ struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_Texture;
 
-namespace that
+namespace sdlw
 {
-	class ImGuiWrapper;
-
 	class SDLWrapper final
 	{
 	public:
@@ -27,12 +26,12 @@ namespace that
 		void DrawClearColor() const;
 		void DrawTexture() const;
 		void SwapBuffer() const;
-		bool HandleEvent(const ImGuiWrapper& imgui) const;
-		Vector2Int GetWindowSize() const;
+		bool HandleEvent() const;
+		that::Vector2Int GetWindowSize() const;
 		SDL_Window* GetWindow() const;
 		SDL_Renderer* GetRenderer() const;
 
-		void DrawPixel(const Vector2Int& coordinate, const Color& color);
+		void DrawPixel(const that::Vector2Int& coordinate, const Color& color);
 
 	private:
 		void UpdateTexture() const;
