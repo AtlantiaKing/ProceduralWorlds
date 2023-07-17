@@ -16,7 +16,7 @@ namespace that::height
 	{
 	public:
 		THATWORLDS_API BasicHeightmap(unsigned int seed);
-		~BasicHeightmap() = default;
+		virtual ~BasicHeightmap() = default;
 
 		virtual float THATWORLDS_API GetHeight(float x, float y) const override;
 
