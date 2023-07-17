@@ -2,8 +2,6 @@
 
 #include "../Perlin/PerlinComposition.h"
 
-#include <imgui.h>
-
 that::height::Heightmap::Heightmap(unsigned int seed)
 {
 	// Reset the seed
