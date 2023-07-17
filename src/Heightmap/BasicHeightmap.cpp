@@ -1,6 +1,6 @@
 #include "BasicHeightmap.h"
 
-#include "../Perlin/PerlinComposition.h"
+#include "../Noise/PerlinComposition.h"
 
 that::height::BasicHeightmap::BasicHeightmap(unsigned int seed)
 {

@@ -8,7 +8,7 @@
 
 #include "RiversGenerator.h"
 
-#include "../Perlin/PerlinComposition.h"
+#include "../Noise/PerlinComposition.h"
 
 namespace that::river
 {

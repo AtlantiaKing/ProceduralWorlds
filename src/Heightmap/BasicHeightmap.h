@@ -8,7 +8,7 @@
 
 #include "HeightmapGenerator.h"
 
-#include "../Perlin/PerlinComposition.h"
+#include "../Noise/PerlinComposition.h"
 
 namespace that::height
 {

@@ -187,7 +187,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
     <ClCompile Include="Heightmap\HeightmapGenerator.cpp" />
-    <ClCompile Include="Perlin\PerlinComposition.cpp" />
+    <ClCompile Include="Noise\PerlinComposition.cpp" />
     <ClCompile Include="Rivers\RiversGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +195,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Heightmap\BasicHeightmap.h" />
     <ClInclude Include="Heightmap\HeightmapGenerator.h" />
-    <ClInclude Include="Perlin\PerlinComposition.h" />
+    <ClInclude Include="Noise\PerlinComposition.h" />
     <ClInclude Include="Rivers\RiversGenerator.h" />
     <ClInclude Include="Structs\Vector2.h" />
   </ItemGroup>
