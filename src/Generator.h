@@ -18,6 +18,9 @@ namespace that
 		Generator() = default;
 		~Generator() = default;
 
+		void THATWORLDS_API SetScale(float scale);
+		float THATWORLDS_API GetScale() const;
+
 		void THATWORLDS_API SetHeightmapGenerator(height::HeightmapGenerator* pGenerator);
 
 		// Returns the heightmap value [0,1] for this coordinate
@@ -25,6 +28,7 @@ namespace that
 
 	private:
 		unsigned int m_Seed{};
+		float m_Scale{ 1.0f };
 
 		std::unique_ptr<height::HeightmapGenerator> m_pHeightGenerator{};
 	};
@@ -33,6 +37,8 @@ namespace that
 	{
 		THATWORLDS_API Generator* Generator_Create();
 		THATWORLDS_API void Generator_Destroy(Generator * pGenerator);
+		THATWORLDS_API void Generator_SetScale(Generator* pGenerator, float scale);
+		THATWORLDS_API float Generator_GetScale(Generator* pGenerator);
 		THATWORLDS_API void Generator_SetHeightmapGenerator(Generator * pGenerator, height::HeightmapGenerator * pHeightmapGenerator);
 		THATWORLDS_API float Generator_GetHeight(Generator * pGenerator, float x, float y);
 	}
