@@ -8,6 +8,7 @@
     <ClCompile Include="Rivers\RiversGenerator.cpp" />
     <ClCompile Include="Rivers\BasicRivers.cpp" />
     <ClCompile Include="Noise\Graph.cpp" />
+    <ClCompile Include="Noise\NoiseMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Structs\Vector2.h" />
@@ -18,6 +19,7 @@
     <ClInclude Include="Rivers\RiversGenerator.h" />
     <ClInclude Include="Rivers\BasicRivers.h" />
     <ClInclude Include="Noise\Graph.h" />
+    <ClInclude Include="Noise\NoiseMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ImGui">
