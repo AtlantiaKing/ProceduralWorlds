@@ -183,16 +183,20 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Rivers\BasicRivers.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
     <ClCompile Include="Heightmap\HeightmapGenerator.cpp" />
     <ClCompile Include="Perlin\PerlinComposition.cpp" />
+    <ClCompile Include="Rivers\RiversGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Rivers\BasicRivers.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Heightmap\BasicHeightmap.h" />
     <ClInclude Include="Heightmap\HeightmapGenerator.h" />
     <ClInclude Include="Perlin\PerlinComposition.h" />
+    <ClInclude Include="Rivers\RiversGenerator.h" />
     <ClInclude Include="Structs\Vector2.h" />
   </ItemGroup>
   <ItemGroup>

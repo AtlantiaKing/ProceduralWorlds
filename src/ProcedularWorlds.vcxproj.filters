@@ -5,6 +5,8 @@
     <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Heightmap\HeightmapGenerator.cpp" />
+    <ClCompile Include="Rivers\RiversGenerator.cpp" />
+    <ClCompile Include="Rivers\BasicRivers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Structs\Vector2.h" />
@@ -12,6 +14,8 @@
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Heightmap\BasicHeightmap.h" />
     <ClInclude Include="Heightmap\HeightmapGenerator.h" />
+    <ClInclude Include="Rivers\RiversGenerator.h" />
+    <ClInclude Include="Rivers\BasicRivers.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ImGui">
