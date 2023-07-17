@@ -12,11 +12,11 @@
 
 namespace that::height
 {
-	class Heightmap final : public HeightmapGenerator
+	class BasicHeightmap final : public HeightmapGenerator
 	{
 	public:
-		THATWORLDS_API Heightmap(unsigned int seed);
-		~Heightmap() = default;
+		THATWORLDS_API BasicHeightmap(unsigned int seed);
+		~BasicHeightmap() = default;
 
 		virtual float THATWORLDS_API GetHeight(float x, float y) const override;
 
@@ -29,9 +29,9 @@ namespace that::height
 
 	extern "C"
 	{
-		THATWORLDS_API Heightmap* Heightmap_Create(unsigned int seed);
-		THATWORLDS_API void Heightmap_Destroy(Heightmap* pGenerator);
-		THATWORLDS_API float Heightmap_GetHeight(Heightmap* pGenerator, float x, float y);
+		THATWORLDS_API BasicHeightmap* BasicHeightmap_Create(unsigned int seed);
+		THATWORLDS_API void BasicHeightmap_Destroy(BasicHeightmap* pGenerator);
+		THATWORLDS_API float BasicHeightmap_GetHeight(BasicHeightmap* pGenerator, float x, float y);
 	}
 }
 

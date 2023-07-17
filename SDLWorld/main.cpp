@@ -9,7 +9,7 @@
 #include <string>
 
 #include <Generator.h>
-#include <Heightmap/Heightmap.h>
+#include <Heightmap/BasicHeightmap.h>
 
 float g_SeaLevel{ 0.5f };
 
@@ -84,8 +84,8 @@ int main()
 
 	// Create a generator
 	that::Generator generator{};
-	generator.SetHeightmapGenerator(new that::height::Heightmap{ seed });
 	generator.SetScale(2.0f);
+	generator.SetHeightmapGenerator(new that::height::BasicHeightmap{ seed });
 
 	// Draw the world
 	for (int x{}; x < width; ++x)
