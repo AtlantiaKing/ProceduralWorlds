@@ -13,7 +13,7 @@ void that::Graph::AddNode(float x, float y)
 	m_Nodes.insert(std::make_pair(x, y));
 }
 
-float that::Graph::GetValue(float x)
+float that::Graph::GetValue(float x) const
 {
 	// Check bound limits
 	if (x < 0.0f) throw std::runtime_error("No value should be mapped under 0");

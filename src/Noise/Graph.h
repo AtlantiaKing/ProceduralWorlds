@@ -17,7 +17,7 @@ namespace that
 		~Graph() = default;
 
 		void THATWORLDS_API AddNode(float x, float y);
-		float THATWORLDS_API GetValue(float x);
+		float THATWORLDS_API GetValue(float x) const;
 
 	private:
 		std::map<float, float> m_Nodes{};
