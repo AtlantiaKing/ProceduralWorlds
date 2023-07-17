@@ -8,68 +8,8 @@
 #include <map>
 #include <string>
 
-#include <Generator.h>
-#include <Heightmap/BasicHeightmap.h>
-#include <Rivers/BasicRivers.h>
-
-float g_SeaLevel{ 0.5f };
-
-float g_LowLevel{ 0.1f };
-float g_MiddleLevel{ 0.2f };
-float g_HighLevel{ 0.3f};
-
-const sdlw::Color g_LowLandColor{ 138, 186, 125 };
-const sdlw::Color g_MiddleLandColor{ 237, 230, 171 };
-const sdlw::Color g_HighLandColor{ 166, 120, 112 };
-
-sdlw::Color GetHeightColor(const that::Generator& generator, int x, int y)
-{
-	// Retrieve the perlin value
-	const float perlinValue{ generator.GetHeight(static_cast<float>(x), static_cast<float>(y)) };
-
-	// Draw nothing if this position is underneath sea level
-	if (perlinValue < g_SeaLevel)
-	{
-		return {};
-	}
-
-	// Calculate the percentage above sealevel
-	const float aboveSeaHeight{ 1.0f - g_SeaLevel };
-	const float perlinContinental{ (perlinValue - g_SeaLevel) / aboveSeaHeight };
-
-	// Return the appropriate color depending on the height of this position
-	if (perlinContinental < g_LowLevel)
-	{
-		return g_LowLandColor;
-	}
-	else if (perlinContinental < g_MiddleLevel)
-	{
-		// Calculate the percentage where the perlin is between low level and middle level
-		const float lowPerlin{ (perlinContinental - g_LowLevel) / (g_MiddleLevel - g_LowLevel) };
-
-		// Lerp from low land color to middle land color
-		return sdlw::Color
-		{
-			static_cast<unsigned int>(g_LowLandColor.r + (g_MiddleLandColor.r - g_LowLandColor.r) * lowPerlin),
-			static_cast<unsigned int>(g_LowLandColor.g + (g_MiddleLandColor.g - g_LowLandColor.g) * lowPerlin),
-			static_cast<unsigned int>(g_LowLandColor.b + (g_MiddleLandColor.b - g_LowLandColor.b) * lowPerlin)
-		};
-	}
-	else
-	{
-		// Calculate the percentage where the perlin is between middle and high level
-		//		and clamp the percentage at 100%
-		const float highPerlin{ std::min((perlinContinental - g_MiddleLevel) / (g_HighLevel - g_MiddleLevel), 1.0f) };
-
-		// Lerp from middle land color to high land color
-		return sdlw::Color
-		{
-			static_cast<unsigned int>(g_MiddleLandColor.r + (g_HighLandColor.r - g_MiddleLandColor.r) * highPerlin),
-			static_cast<unsigned int>(g_MiddleLandColor.g + (g_HighLandColor.g - g_MiddleLandColor.g) * highPerlin),
-			static_cast<unsigned int>(g_MiddleLandColor.b + (g_HighLandColor.b - g_MiddleLandColor.b) * highPerlin)
-		};
-	}
-}
+#include <Noise/Graph.h>
+#include <Noise/NoiseMap.h>
 
 int main()
 {
@@ -83,20 +23,50 @@ int main()
 	constexpr int height{ 480 };
 	sdlw::SDLWrapper sdl{ width, height };
 
-	// Create a generator
-	that::Generator generator{};
-	generator.SetScale(2.0f);
-	generator.SetHeightmapGenerator(new that::height::BasicHeightmap{ seed });
-	generator.SetRiversGenerator(new that::river::BasicRivers{ seed });
+	that::NoiseMap noise{};
 
-	// Draw the world
-	for (int x{}; x < width; ++x)
+	that::PerlinComposition& perlin{ noise.GetPerlin() };
+	const float zoom{ 400.0f };
+	perlin.AddOctave(1.0f, zoom);
+	perlin.AddOctave(0.5f, zoom);
+	perlin.AddOctave(0.333f, zoom);
+	perlin.AddOctave(0.25f, zoom);
+
+	that::Graph& graph{ noise.GetGraph() };
+	graph.AddNode(0.0f, 0.2f);
+	graph.AddNode(0.6f, 0.5f);
+	graph.AddNode(0.65f, 0.9f);
+	graph.AddNode(1.0f, 1.0f);
+
+	float lowest = 1.0f;
+	float highest = 0.0f;
+
+	const int mapSize{ 200 };
+	const int distanceBetweenMaps{ 10 };
+
+	for (int x{}; x < mapSize; ++x)
 	{
-		for (int y{}; y < height; ++y)
+		for (int y{}; y < mapSize; ++y)
 		{
-			sdl.DrawPixel({ x,y }, GetHeightColor(generator, x, y));
+			const float perlinValue{ perlin.GetNoise(static_cast<float>(x), static_cast<float>(y)) };
+
+			if (perlinValue < lowest) lowest = perlinValue;
+			if (perlinValue > highest) highest = perlinValue;
+
+			const unsigned int perlinColor{ static_cast<unsigned int>(perlinValue * UINT8_MAX) };
+
+			sdl.DrawPixel({ x + mapSize + distanceBetweenMaps, y }, { perlinColor,perlinColor,perlinColor });
+
+			const float noiseValue{ noise.GetNoise(static_cast<float>(x), static_cast<float>(y)) };
+
+			const unsigned int color{ static_cast<unsigned int>(noiseValue * UINT8_MAX) };
+
+			sdl.DrawPixel({ x, y }, { color,color,color });
 		}
 	}
+
+	std::cout << "highest perlin = " << highest << "\n";
+	std::cout << "lowest perlin = " << lowest << "\n";
 
 	// While the close button of the window isn't pressed
 	while (sdl.HandleEvent())
