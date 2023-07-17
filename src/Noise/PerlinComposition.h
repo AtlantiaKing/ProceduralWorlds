@@ -18,10 +18,10 @@ namespace that
 		PerlinComposition() = default;
 		~PerlinComposition() = default;
 
-		void THATWORLDS_API AddOctave(float multiplier, float zoom);
+		THATWORLDS_API void AddOctave(float multiplier, float zoom);
 
-		float THATWORLDS_API GetNoise(int x, int y) const;
-		float THATWORLDS_API GetNoise(float x, float y) const;
+		THATWORLDS_API float GetNoise(int x, int y) const;
+		THATWORLDS_API float GetNoise(float x, float y) const;
 
 	private:
 		struct PerlinOctave
