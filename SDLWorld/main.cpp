@@ -10,6 +10,7 @@
 
 #include <Noise/Graph.h>
 #include <Noise/NoiseMap.h>
+#include <Heightmap/HeightMap.h>
 
 int main()
 {
@@ -23,50 +24,86 @@ int main()
 	constexpr int height{ 480 };
 	sdlw::SDLWrapper sdl{ width, height };
 
-	that::NoiseMap noise{};
+	// Create continental noise map
+	that::NoiseMap continentalNoise{};
 
-	that::PerlinComposition& perlin{ noise.GetPerlin() };
-	const float zoom{ 400.0f };
-	perlin.AddOctave(1.0f, zoom);
-	perlin.AddOctave(0.5f, zoom);
-	perlin.AddOctave(0.333f, zoom);
-	perlin.AddOctave(0.25f, zoom);
+	that::PerlinComposition& continentalPerlin{ continentalNoise.GetPerlin() };
+	const float continentalZoom{ 50.0f };
+	continentalPerlin.AddOctave(1.0f, continentalZoom);
+	continentalPerlin.AddOctave(0.5f, continentalZoom);
+	continentalPerlin.AddOctave(0.333f, continentalZoom);
+	continentalPerlin.AddOctave(0.25f, continentalZoom);
 
-	that::Graph& graph{ noise.GetGraph() };
-	graph.AddNode(0.0f, 0.2f);
-	graph.AddNode(0.6f, 0.5f);
-	graph.AddNode(0.65f, 0.9f);
-	graph.AddNode(1.0f, 1.0f);
+	that::Graph& continentalGraph{ continentalNoise.GetGraph() };
+	continentalGraph.AddNode(0.0f, 1.0f);
+	continentalGraph.AddNode(0.1f, 0.2f);
+	continentalGraph.AddNode(0.4f, 0.25f);
+	continentalGraph.AddNode(0.45f, 0.4f);
+	continentalGraph.AddNode(0.55f, 0.45f);
+	continentalGraph.AddNode(0.6f, 0.85f);
+	continentalGraph.AddNode(1.0f, 1.0f);
 
-	float lowest = 1.0f;
-	float highest = 0.0f;
+	// Create erosion noise map
+	that::NoiseMap erosionNoise{};
 
-	const int mapSize{ 200 };
-	const int distanceBetweenMaps{ 10 };
+	that::PerlinComposition& erosionPerlin{ erosionNoise.GetPerlin() };
+	const float erosionZoom{ 100.0f };
+	erosionPerlin.AddOctave(1.0f, erosionZoom);
+	erosionPerlin.AddOctave(0.5f, erosionZoom);
 
+	that::Graph& erosionGraph{ erosionNoise.GetGraph() };
+	erosionGraph.AddNode(0.0f, 1.0f);
+	erosionGraph.AddNode(0.1f, 0.8f);
+	erosionGraph.AddNode(0.25f, 0.5f);
+	erosionGraph.AddNode(0.3f, 0.55f);
+	erosionGraph.AddNode(0.5f, 0.25f);
+	erosionGraph.AddNode(0.6f, 0.2f);
+	erosionGraph.AddNode(0.63f, 0.4f);
+	erosionGraph.AddNode(0.73f, 0.45f);
+	erosionGraph.AddNode(0.76f, 0.2f);
+	erosionGraph.AddNode(1.0f, 0.1f);
+
+	// Create peaks and valleys noise map
+	that::NoiseMap pvNoise{};
+
+	that::PerlinComposition& pvPerlin{ pvNoise.GetPerlin() };
+	const float pvZoom{ 20.0f };
+	pvPerlin.AddOctave(1.0f, pvZoom);
+	pvPerlin.AddOctave(0.5f, pvZoom);
+	pvPerlin.AddOctave(0.333f, pvZoom);
+	pvPerlin.AddOctave(0.25f, pvZoom);
+
+	that::Graph& pvGraph{ pvNoise.GetGraph() };
+	pvGraph.AddNode(0.0f, 0.0f);
+	pvGraph.AddNode(0.2f, 0.2f);
+	pvGraph.AddNode(0.4f, 0.35f);
+	pvGraph.AddNode(0.5f, 0.4f);
+	pvGraph.AddNode(0.6f, 0.7f);
+	pvGraph.AddNode(0.75f, 0.85f);
+	pvGraph.AddNode(0.9f, 0.7f);
+	pvGraph.AddNode(1.0f, 0.7f);
+
+	// Create heightmap
+	that::HeightMap heightMap{};
+	heightMap.AddNoiseMap(continentalNoise);
+	heightMap.AddNoiseMap(erosionNoise);
+	heightMap.AddNoiseMap(pvNoise);
+
+	heightMap.SetBlendMode(that::HeightMap::BlendMode::Average);
+
+	// Draw world
+	constexpr int mapSize{ 400 };
 	for (int x{}; x < mapSize; ++x)
 	{
 		for (int y{}; y < mapSize; ++y)
 		{
-			const float perlinValue{ perlin.GetNoise(static_cast<float>(x), static_cast<float>(y)) };
+			const float noiseValue{ heightMap.GetHeight(static_cast<float>(x), static_cast<float>(y)) };
 
-			if (perlinValue < lowest) lowest = perlinValue;
-			if (perlinValue > highest) highest = perlinValue;
+			const unsigned int colorValue{ static_cast<unsigned int>(noiseValue * UINT8_MAX) };
 
-			const unsigned int perlinColor{ static_cast<unsigned int>(perlinValue * UINT8_MAX) };
-
-			sdl.DrawPixel({ x + mapSize + distanceBetweenMaps, y }, { perlinColor,perlinColor,perlinColor });
-
-			const float noiseValue{ noise.GetNoise(static_cast<float>(x), static_cast<float>(y)) };
-
-			const unsigned int color{ static_cast<unsigned int>(noiseValue * UINT8_MAX) };
-
-			sdl.DrawPixel({ x, y }, { color,color,color });
+			sdl.DrawPixel({ x, y }, { colorValue, colorValue, colorValue });
 		}
 	}
-
-	std::cout << "highest perlin = " << highest << "\n";
-	std::cout << "lowest perlin = " << lowest << "\n";
 
 	// While the close button of the window isn't pressed
 	while (sdl.HandleEvent())
