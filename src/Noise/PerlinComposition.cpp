@@ -1,5 +1,8 @@
 #include "PerlinComposition.h"
 
+const float that::PerlinComposition::m_MiddleOfNoise{ 500'000 };
+const float that::PerlinComposition::m_MaxOctaveDisplacement{ 100'000 };
+
 void that::PerlinComposition::AddOctave(float multiplier, float zoom)
 {
 	// Calculates the maximum value of noise a coordinate can have

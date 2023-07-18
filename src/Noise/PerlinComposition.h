@@ -39,8 +39,8 @@ namespace that
 		float m_MaxNoiseValue{};
 		std::vector<PerlinOctave> m_Octaves{};
 
-		const float m_MiddleOfNoise{ 500'000 };
-		const float m_MaxOctaveDisplacement{ 100'000 };
+		static const float m_MiddleOfNoise;
+		static const float m_MaxOctaveDisplacement;
 	};
 
 	extern "C"
