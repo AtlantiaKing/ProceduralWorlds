@@ -5,8 +5,10 @@
 #include "../Noise/Graph.h"
 #include "../Heightmap/HeightMap.h"
 
-void that::preset::Presets::CreateDefaultTerrain(Generator& generator, float mapZoom)
+void that::preset::Presets::CreateDefaultTerrain(Generator& generator, unsigned int seed, float mapZoom)
 {
+	srand(seed);
+
 	// Create continental noise map
 	that::NoiseMap continentalNoise{};
 
@@ -75,7 +77,7 @@ void that::preset::Presets::CreateDefaultTerrain(Generator& generator, float map
 	heightMap.SetBlendMode(that::HeightMap::BlendMode::Average);
 }
 
-void that::preset::Presets_CreateDefaultTerrain(Generator* pGenerator, float mapZoom)
+void that::preset::Presets_CreateDefaultTerrain(Generator* pGenerator, unsigned int seed, float mapZoom)
 {
-	Presets::CreateDefaultTerrain(*pGenerator, mapZoom);
+	Presets::CreateDefaultTerrain(*pGenerator, seed, mapZoom);
 }

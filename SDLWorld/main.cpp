@@ -26,7 +26,7 @@ int main()
 	that::Generator gen{};
 
 	const float mapZoom{ 2.0f };
-	that::preset::Presets::CreateDefaultTerrain(gen, mapZoom);
+	that::preset::Presets::CreateDefaultTerrain(gen, seed, mapZoom);
 
 	// Draw world
 	constexpr int mapSize{ 400 };

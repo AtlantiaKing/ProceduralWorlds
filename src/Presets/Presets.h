@@ -15,10 +15,10 @@ namespace that
 		class Presets
 		{
 		public:
-			THATWORLDS_API static void CreateDefaultTerrain(Generator& generator, float mapZoom);
+			THATWORLDS_API static void CreateDefaultTerrain(Generator& generator, unsigned int seed, float mapZoom);
 		};
 
-		extern "C" THATWORLDS_API void Presets_CreateDefaultTerrain(Generator* pGenerator, float mapZoom);
+		extern "C" THATWORLDS_API void Presets_CreateDefaultTerrain(Generator* pGenerator, unsigned int seed, float mapZoom);
 	}
 }
 
