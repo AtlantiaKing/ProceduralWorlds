@@ -183,6 +183,8 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="WorldShape\SquarePeak.cpp" />
+    <ClCompile Include="WorldShape\CirclePeak.cpp" />
     <ClCompile Include="Heightmap\HeightMap.cpp" />
     <ClCompile Include="Noise\Graph.cpp" />
     <ClCompile Include="Noise\NoiseMap.cpp" />
@@ -196,6 +198,8 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClCompile Include="SuccessPredicate.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WorldShape\SquarePeak.h" />
+    <ClInclude Include="WorldShape\CirclePeak.h" />
     <ClInclude Include="Heightmap\HeightMap.h" />
     <ClInclude Include="Noise\Graph.h" />
     <ClInclude Include="Noise\NoiseMap.h" />
@@ -208,6 +212,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Rivers\RiversGenerator.h" />
     <ClInclude Include="Structs\Vector2.h" />
     <ClInclude Include="SuccessPredicate.h" />
+    <ClInclude Include="WorldShape\WorldShape.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

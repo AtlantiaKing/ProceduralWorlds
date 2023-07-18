@@ -11,6 +11,9 @@
 #include <Generator.h>
 #include <Presets/Presets.h>
 
+#include <WorldShape/CirclePeak.h>
+#include <WorldShape/SquarePeak.h>
+
 int main()
 {
 	// Calculate a new seed
@@ -28,6 +31,8 @@ int main()
 	const float mapZoom{ 2.0f };
 	that::Generator gen{};
 	gen.SetSize(mapSize);
+	//gen.SetShape(std::make_unique<that::shape::CirclePeak>(4.0f));
+	gen.SetShape(std::make_unique<that::shape::SquarePeak>(6.0f, 4.0f));
 	that::preset::Presets::CreateDefaultTerrain(gen, seed, mapZoom);
 
 	// Test if there is a jump of 0.15 in height somewhere in the map over steps of 5

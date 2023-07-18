@@ -12,6 +12,8 @@
     <ClCompile Include="Heightmap\HeightMap.cpp" />
     <ClCompile Include="Presets\Presets.cpp" />
     <ClCompile Include="SuccessPredicate.cpp" />
+    <ClCompile Include="WorldShape\CirclePeak.cpp" />
+    <ClCompile Include="WorldShape\SquarePeak.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Structs\Vector2.h" />
@@ -26,6 +28,9 @@
     <ClInclude Include="Heightmap\HeightMap.h" />
     <ClInclude Include="Presets\Presets.h" />
     <ClInclude Include="SuccessPredicate.h" />
+    <ClInclude Include="WorldShape\WorldShape.h" />
+    <ClInclude Include="WorldShape\CirclePeak.h" />
+    <ClInclude Include="WorldShape\SquarePeak.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ImGui">

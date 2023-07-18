@@ -8,6 +8,9 @@
 
 #include "Heightmap/HeightMap.h"
 #include "SuccessPredicate.h"
+#include "WorldShape/WorldShape.h"
+
+#include <memory>
 
 namespace that
 {
@@ -19,6 +22,7 @@ namespace that
 
 		THATWORLDS_API void SetSize(float size);
 		THATWORLDS_API void AddPredicate(const SuccessPredicate& predicate);
+		THATWORLDS_API void SetShape(std::unique_ptr<shape::WorldShape> pShape);
 
 		THATWORLDS_API HeightMap& GetHeightMap();
 
@@ -31,6 +35,8 @@ namespace that
 
 		std::vector<SuccessPredicate> m_SuccessPredicates{};
 
+		std::unique_ptr<shape::WorldShape> m_pShape{};
+
 		float m_Size{ 100.0f };
 	};
 
@@ -38,7 +44,11 @@ namespace that
 	{
 		THATWORLDS_API Generator* Generator_Create();
 		THATWORLDS_API void Generator_Destroy(Generator* pGenerator);
+		THATWORLDS_API void Generator_SetSize(Generator* pGenerator, float size);
+		THATWORLDS_API void Generator_AddPredicate(Generator* pGenerator, SuccessPredicate* pPredicate);
+		THATWORLDS_API void Generator_SetShape(Generator* pGenerator, shape::WorldShape* pPredicate);
 		THATWORLDS_API HeightMap* Generator_GetHeightMap(Generator* pGenerator);
 		THATWORLDS_API float Generator_GetHeight(Generator* pGenerator, float x, float y);
+		THATWORLDS_API bool Generator_TryPredicates(Generator* pGenerator, int step);
 	}
 }

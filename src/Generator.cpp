@@ -1,5 +1,7 @@
 #include "Generator.h"
 
+#include "WorldShape/WorldShape.h"
+
 void that::Generator::SetSize(float size)
 {
 	m_Size = size;
@@ -10,6 +12,11 @@ void that::Generator::AddPredicate(const SuccessPredicate& predicate)
 	m_SuccessPredicates.emplace_back(predicate);
 }
 
+void that::Generator::SetShape(std::unique_ptr<shape::WorldShape> pShape)
+{
+	m_pShape = std::move(pShape);
+}
+
 that::HeightMap& that::Generator::GetHeightMap()
 {
 	return m_HeightMap;
@@ -17,7 +24,13 @@ that::HeightMap& that::Generator::GetHeightMap()
 
 float that::Generator::GetHeight(float x, float y) const
 {
-	return m_HeightMap.GetHeight(x, y);
+	// Retrieve the height from the heightmap
+	float height{ m_HeightMap.GetHeight(x, y) };
+
+	// If a shape is assigned, transform the heightmap to match the shape
+	if (m_pShape) height = m_pShape->Transform(m_Size, x, y, height);
+
+	return height;
 }
 
 bool that::Generator::TryPredicates(int step)
@@ -81,6 +94,21 @@ extern "C"
 		delete pGenerator;
 	}
 
+	THATWORLDS_API void that::Generator_SetSize(Generator* pGenerator, float size)
+	{
+		pGenerator->SetSize(size);
+	}
+
+	THATWORLDS_API void that::Generator_AddPredicate(Generator* pGenerator, SuccessPredicate* pPredicate)
+	{
+		pGenerator->AddPredicate(*pPredicate);
+	}
+
+	THATWORLDS_API void that::Generator_SetShape(Generator* pGenerator, shape::WorldShape* pPredicate)
+	{
+		pGenerator->SetShape(std::unique_ptr<shape::WorldShape>{ pPredicate });
+	}
+
 	THATWORLDS_API that::HeightMap* that::Generator_GetHeightMap(Generator* pGenerator)
 	{
 		return &pGenerator->GetHeightMap();
@@ -89,5 +117,10 @@ extern "C"
 	THATWORLDS_API float that::Generator_GetHeight(Generator* pGenerator, float x, float y)
 	{
 		return pGenerator->GetHeight(x, y);
+	}
+
+	THATWORLDS_API bool that::Generator_TryPredicates(Generator* pGenerator, int step)
+	{
+		return pGenerator->TryPredicates(step);
 	}
 }
