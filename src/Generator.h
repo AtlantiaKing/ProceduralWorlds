@@ -7,6 +7,7 @@
 #endif
 
 #include "Heightmap/HeightMap.h"
+#include "SuccessPredicate.h"
 
 namespace that
 {
@@ -16,13 +17,21 @@ namespace that
 		Generator() = default;
 		~Generator() = default;
 
+		THATWORLDS_API void SetSize(float size);
+		THATWORLDS_API void AddPredicate(const SuccessPredicate& predicate);
+
 		THATWORLDS_API HeightMap& GetHeightMap();
 
 		// Returns the heightmap value [0,1] for this coordinate
 		THATWORLDS_API float GetHeight(float x, float y) const;
+		THATWORLDS_API bool TryPredicates(int step);
 
 	private:
 		HeightMap m_HeightMap{};
+
+		std::vector<SuccessPredicate> m_SuccessPredicates{};
+
+		float m_Size{ 100.0f };
 	};
 
 	extern "C"

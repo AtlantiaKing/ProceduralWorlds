@@ -23,13 +23,18 @@ int main()
 	constexpr int height{ 480 };
 	sdlw::SDLWrapper sdl{ width, height };
 
-	that::Generator gen{};
-
+	// Create generator
+	constexpr float mapSize{ 400.0f };
 	const float mapZoom{ 2.0f };
+	that::Generator gen{};
+	gen.SetSize(mapSize);
 	that::preset::Presets::CreateDefaultTerrain(gen, seed, mapZoom);
 
+	// Test if there is a jump of 0.15 in height somewhere in the map over steps of 5
+	gen.AddPredicate(that::SuccessPredicate{ [](float height0, float height1) -> bool { return abs(height0 - height1) > 0.15f; } });
+	std::cout << "Valid world: " << gen.TryPredicates(5) << "\n";
+
 	// Draw world
-	constexpr int mapSize{ 400 };
 	for (int x{}; x < mapSize; ++x)
 	{
 		for (int y{}; y < mapSize; ++y)
