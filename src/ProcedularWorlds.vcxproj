@@ -186,6 +186,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClCompile Include="Heightmap\HeightMap.cpp" />
     <ClCompile Include="Noise\Graph.cpp" />
     <ClCompile Include="Noise\NoiseMap.cpp" />
+    <ClCompile Include="Presets\Presets.cpp" />
     <ClCompile Include="Rivers\BasicRivers.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
@@ -197,6 +198,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Heightmap\HeightMap.h" />
     <ClInclude Include="Noise\Graph.h" />
     <ClInclude Include="Noise\NoiseMap.h" />
+    <ClInclude Include="Presets\Presets.h" />
     <ClInclude Include="Rivers\BasicRivers.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Heightmap\BasicHeightmap.h" />

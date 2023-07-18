@@ -10,6 +10,7 @@
     <ClCompile Include="Noise\Graph.cpp" />
     <ClCompile Include="Noise\NoiseMap.cpp" />
     <ClCompile Include="Heightmap\HeightMap.cpp" />
+    <ClCompile Include="Presets\Presets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Structs\Vector2.h" />
@@ -22,6 +23,7 @@
     <ClInclude Include="Noise\Graph.h" />
     <ClInclude Include="Noise\NoiseMap.h" />
     <ClInclude Include="Heightmap\HeightMap.h" />
+    <ClInclude Include="Presets\Presets.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ImGui">
