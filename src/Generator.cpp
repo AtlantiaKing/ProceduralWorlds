@@ -104,9 +104,9 @@ extern "C"
 		pGenerator->AddPredicate(*pPredicate);
 	}
 
-	THATWORLDS_API void that::Generator_SetShape(Generator* pGenerator, shape::WorldShape* pPredicate)
+	THATWORLDS_API void that::Generator_SetShape(Generator* pGenerator, shape::WorldShape* pShape)
 	{
-		pGenerator->SetShape(std::unique_ptr<shape::WorldShape>{ pPredicate });
+		pGenerator->SetShape(std::unique_ptr<shape::WorldShape>{ pShape });
 	}
 
 	THATWORLDS_API that::HeightMap* that::Generator_GetHeightMap(Generator* pGenerator)

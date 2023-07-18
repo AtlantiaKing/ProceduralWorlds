@@ -46,7 +46,7 @@ namespace that
 		THATWORLDS_API void Generator_Destroy(Generator* pGenerator);
 		THATWORLDS_API void Generator_SetSize(Generator* pGenerator, float size);
 		THATWORLDS_API void Generator_AddPredicate(Generator* pGenerator, SuccessPredicate* pPredicate);
-		THATWORLDS_API void Generator_SetShape(Generator* pGenerator, shape::WorldShape* pPredicate);
+		THATWORLDS_API void Generator_SetShape(Generator* pGenerator, shape::WorldShape* pShape);
 		THATWORLDS_API HeightMap* Generator_GetHeightMap(Generator* pGenerator);
 		THATWORLDS_API float Generator_GetHeight(Generator* pGenerator, float x, float y);
 		THATWORLDS_API bool Generator_TryPredicates(Generator* pGenerator, int step);
