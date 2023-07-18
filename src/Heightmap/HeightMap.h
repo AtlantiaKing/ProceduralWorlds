@@ -33,7 +33,7 @@ namespace that
 	private:
 		std::vector<NoiseMap> m_NoiseMaps{};
 
-		BlendMode m_BlendMode{ BlendMode::Multiply };
+		BlendMode m_BlendMode{ BlendMode::Average };
 	};
 
 	extern "C"

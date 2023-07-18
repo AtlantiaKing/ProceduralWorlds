@@ -11,6 +11,7 @@
 #include <Noise/Graph.h>
 #include <Noise/NoiseMap.h>
 #include <Heightmap/HeightMap.h>
+#include <Generator.h>
 
 int main()
 {
@@ -24,11 +25,15 @@ int main()
 	constexpr int height{ 480 };
 	sdlw::SDLWrapper sdl{ width, height };
 
+	that::Generator gen{};
+
 	// Create continental noise map
 	that::NoiseMap continentalNoise{};
 
+	const float mapZoom{ 2.0f };
+
 	that::PerlinComposition& continentalPerlin{ continentalNoise.GetPerlin() };
-	const float continentalZoom{ 50.0f };
+	const float continentalZoom{ 50.0f * mapZoom };
 	continentalPerlin.AddOctave(1.0f, continentalZoom);
 	continentalPerlin.AddOctave(0.5f, continentalZoom);
 	continentalPerlin.AddOctave(0.333f, continentalZoom);
@@ -47,7 +52,7 @@ int main()
 	that::NoiseMap erosionNoise{};
 
 	that::PerlinComposition& erosionPerlin{ erosionNoise.GetPerlin() };
-	const float erosionZoom{ 100.0f };
+	const float erosionZoom{ 100.0f * mapZoom };
 	erosionPerlin.AddOctave(1.0f, erosionZoom);
 	erosionPerlin.AddOctave(0.5f, erosionZoom);
 
@@ -67,7 +72,7 @@ int main()
 	that::NoiseMap pvNoise{};
 
 	that::PerlinComposition& pvPerlin{ pvNoise.GetPerlin() };
-	const float pvZoom{ 20.0f };
+	const float pvZoom{ 20.0f * mapZoom };
 	pvPerlin.AddOctave(1.0f, pvZoom);
 	pvPerlin.AddOctave(0.5f, pvZoom);
 	pvPerlin.AddOctave(0.333f, pvZoom);
@@ -84,7 +89,7 @@ int main()
 	pvGraph.AddNode(1.0f, 0.7f);
 
 	// Create heightmap
-	that::HeightMap heightMap{};
+	that::HeightMap heightMap{ gen.GetHeightMap() };
 	heightMap.AddNoiseMap(continentalNoise);
 	heightMap.AddNoiseMap(erosionNoise);
 	heightMap.AddNoiseMap(pvNoise);
