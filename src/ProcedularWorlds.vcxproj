@@ -202,7 +202,7 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Presets\Presets.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Noise\PerlinComposition.h" />
-    <ClInclude Include="Structs\Vector2.h" />
+    <ClInclude Include="Structs\ThatVector2.h" />
     <ClInclude Include="SuccessPredicate.h" />
     <ClInclude Include="WorldShape\WorldShape.h" />
   </ItemGroup>

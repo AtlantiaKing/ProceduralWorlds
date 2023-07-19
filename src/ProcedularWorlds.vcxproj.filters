@@ -12,7 +12,7 @@
     <ClCompile Include="WorldShape\SquarePeak.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Structs\Vector2.h" />
+    <ClInclude Include="Structs\ThatVector2.h" />
     <ClInclude Include="Noise\PerlinComposition.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Noise\Graph.h" />

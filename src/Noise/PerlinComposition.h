@@ -6,7 +6,7 @@
 #define THATWORLDS_API __declspec(dllimport)
 #endif
 
-#include "../Structs/Vector2.h"
+#include "../Structs/ThatVector2.h"
 
 #include <vector>
 

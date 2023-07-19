@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Structs/Vector2.h"
+#include "Structs/ThatVector2.h"
 
 #include "../Utils/Color.h"
 
