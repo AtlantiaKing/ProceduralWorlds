@@ -14,7 +14,7 @@ float that::shape::SquarePeak::Transform(float size, float x, float y, float hei
 	const float radius{ size / 2.0f };
 
 	// Calculate the distance from the center of the rounded square
-	const float distanceFromCenter{ powf((x - radius) / radius, m_Angularity) + powf((y - radius) / radius, m_Angularity) };
+	const float distanceFromCenter{ powf(powf((x - radius) / radius, m_Angularity) + powf((y - radius) / radius, m_Angularity), 1.0f / m_Angularity) };
 
 	// Map the distance to the function f(x)=-x^power+1 so the value tends to go to 1 faster
 	const float mappedDistance{ -powf(distanceFromCenter, m_SmoothPower) + 1 };
