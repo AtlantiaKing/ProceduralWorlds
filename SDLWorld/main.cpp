@@ -28,11 +28,24 @@ int main()
 
 	// Create generator
 	constexpr float mapSize{ 400.0f };
-	const float mapZoom{ 2.0f };
+	constexpr float mapZoom{ 2.0f };
 	that::Generator gen{};
 	gen.SetSize(mapSize);
-	//gen.SetShape(std::make_unique<that::shape::CirclePeak>(4.0f));
-	gen.SetShape(std::make_unique<that::shape::SquarePeak>(6.0f, 4.0f));
+
+	// Create a shape for the terrain
+	const bool circle{ false };
+	constexpr float smoothPower{ 3.0f };
+	if (circle)
+	{
+		gen.SetShape(std::make_unique<that::shape::CirclePeak>(smoothPower));
+	}
+	else
+	{
+		constexpr float angularity{ 6.0f };
+		gen.SetShape(std::make_unique<that::shape::SquarePeak>(angularity, smoothPower));
+	}
+
+	// Create a terrain generator
 	that::preset::Presets::CreateDefaultTerrain(gen, seed, mapZoom);
 
 	// Test if there is a jump of 0.15 in height somewhere in the map over steps of 5
