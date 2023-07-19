@@ -2,11 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Noise\PerlinComposition.cpp" />
-    <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
     <ClCompile Include="Generator.cpp" />
-    <ClCompile Include="Heightmap\HeightmapGenerator.cpp" />
-    <ClCompile Include="Rivers\RiversGenerator.cpp" />
-    <ClCompile Include="Rivers\BasicRivers.cpp" />
     <ClCompile Include="Noise\Graph.cpp" />
     <ClCompile Include="Noise\NoiseMap.cpp" />
     <ClCompile Include="Heightmap\HeightMap.cpp" />
@@ -19,10 +15,6 @@
     <ClInclude Include="Structs\Vector2.h" />
     <ClInclude Include="Noise\PerlinComposition.h" />
     <ClInclude Include="Generator.h" />
-    <ClInclude Include="Heightmap\BasicHeightmap.h" />
-    <ClInclude Include="Heightmap\HeightmapGenerator.h" />
-    <ClInclude Include="Rivers\RiversGenerator.h" />
-    <ClInclude Include="Rivers\BasicRivers.h" />
     <ClInclude Include="Noise\Graph.h" />
     <ClInclude Include="Noise\NoiseMap.h" />
     <ClInclude Include="Heightmap\HeightMap.h" />

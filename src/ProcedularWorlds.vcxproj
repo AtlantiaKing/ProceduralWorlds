@@ -189,12 +189,8 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClCompile Include="Noise\Graph.cpp" />
     <ClCompile Include="Noise\NoiseMap.cpp" />
     <ClCompile Include="Presets\Presets.cpp" />
-    <ClCompile Include="Rivers\BasicRivers.cpp" />
     <ClCompile Include="Generator.cpp" />
-    <ClCompile Include="Heightmap\BasicHeightmap.cpp" />
-    <ClCompile Include="Heightmap\HeightmapGenerator.cpp" />
     <ClCompile Include="Noise\PerlinComposition.cpp" />
-    <ClCompile Include="Rivers\RiversGenerator.cpp" />
     <ClCompile Include="SuccessPredicate.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,12 +200,8 @@ xcopy "$(SolutionDir)..\3rdparty\SDL2Image\lib\$(PlatformTarget)\SDL2_image.dll"
     <ClInclude Include="Noise\Graph.h" />
     <ClInclude Include="Noise\NoiseMap.h" />
     <ClInclude Include="Presets\Presets.h" />
-    <ClInclude Include="Rivers\BasicRivers.h" />
     <ClInclude Include="Generator.h" />
-    <ClInclude Include="Heightmap\BasicHeightmap.h" />
-    <ClInclude Include="Heightmap\HeightmapGenerator.h" />
     <ClInclude Include="Noise\PerlinComposition.h" />
-    <ClInclude Include="Rivers\RiversGenerator.h" />
     <ClInclude Include="Structs\Vector2.h" />
     <ClInclude Include="SuccessPredicate.h" />
     <ClInclude Include="WorldShape\WorldShape.h" />
