@@ -33,7 +33,7 @@ int main()
 	gen.SetSize(mapSize);
 
 	// Create a shape for the terrain
-	const bool circle{ false };
+	constexpr bool circle{ false };
 	constexpr float smoothPower{ 3.0f };
 	if (circle)
 	{
@@ -61,7 +61,7 @@ int main()
 
 			const unsigned int colorValue{ static_cast<unsigned int>(noiseValue * UINT8_MAX) };
 
-			sdl.DrawPixel({ x, y }, { colorValue, colorValue, colorValue });
+			sdl.DrawPixel({ x, y }, { noiseValue < 0.3f ? 0 : colorValue, noiseValue < 0.3f ? 0 : colorValue, noiseValue < 0.3f ? 0 : colorValue });
 		}
 	}
 
