@@ -31,6 +31,11 @@ namespace that
 
         public IntPtr Native { get; private set; }
 
+        public HeightMap HeightMap
+        {
+            get { return new HeightMap(Generator_GetHeightMap(Native)); }
+        }
+
         public Generator()
         {
             Native = Generator_Create();
@@ -54,11 +59,6 @@ namespace that
         public void SetShape(shape.IWorldShape shape)
         {
             Generator_SetShape(Native, shape.Native);
-        }
-
-        public HeightMap GetHeightMap()
-        {
-            return new HeightMap(Generator_GetHeightMap(Native));
         }
 
         public float GetHeight(float x, float y)

@@ -27,7 +27,7 @@ namespace that
             get { return new PerlinComposition(NoiseMap_GetPerlin(Native)); }
         }
 
-        public Graph GetGraph
+        public Graph Graph
         {
             get { return new Graph(NoiseMap_GetGraph(Native)); }
         }
