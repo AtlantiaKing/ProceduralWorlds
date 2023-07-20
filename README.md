@@ -22,7 +22,7 @@ This project contains two source directories:
    This is the C# wrapper around the ProcedularWorlds dll
 
 ## Installation
-Download the latest version of the C# or C++ library here: https://github.com/SanderDeKeukelaere/ProcedularWorlds/releases/
+Download the latest version of the C# or C++ library here: https://github.com/AtlantiaKing/ProcedularWorlds/releases/
 
 ### C++
 The C++ zip file contains 
@@ -35,4 +35,4 @@ The C# zip file contains
 - a src folder that contains all the C# equivalent code that hooks into the library ready to use.  
 
 ## Usage
-Check out the documentation here: https://sanderdekeukelaere.github.io/ProcedularWorlds/
+Check out the documentation here: https://atlantiaking.github.io/ProcedularWorlds/
