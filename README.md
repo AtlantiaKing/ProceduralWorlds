@@ -1,4 +1,4 @@
-# ProcedularWorlds
+# ProceduralWorlds
 
 Even though the C++ and C# workflows are near-identical, I have split them into two parts for ease of use.
 
@@ -133,7 +133,7 @@ The return value of this function should be whether or not the predicate succeed
 
 ## C# documentation <a name="CSharp"></a>
 
-Before usage of this library you need to set up the location of the dll file inside the file **ProcedularWorldsDll.cs**.  
+Before usage of this library you need to set up the location of the dll file inside the file **ProceduralWorldsDll.cs**.  
 There is a string variable called DLL_NAME that needs to be changed to the location of the dll file.
 
 ### List of classes
